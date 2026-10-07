@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>YatraX | Explore India</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:#071713;color:#f4f7f3;}
+
+header{
+    height:75px;display:flex;justify-content:center;align-items:center;
+    background:rgba(7,23,19,0.94);border-bottom:1px solid rgba(255,255,255,0.08);
+    position:sticky;top:0;z-index:100;padding:0 24px;
+}
+.logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;letter-spacing:1px;}
+.logo span{color:#5bd0a8;}
+
+/* ---- Auth area in header (right side) ---- */
+.auth-area{
+    position:absolute;
+    right:24px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:13px;
+}
+.auth-area a,
+.auth-area button{
+    padding:9px 18px;
+    border-radius:999px;
+    background:#5bd0a8;
+    color:#062119;
+    font-weight:700;
+    font-size:12px;
+    border:none;
+    text-decoration:none;
+    cursor:pointer;
+    transition:.2s;
+    font-family:'DM Sans',sans-serif;
+}
+.auth-area a:hover,
+.auth-area button:hover{background:#71dcc0;transform:translateY(-2px);}
+.auth-user{
+    color:#c2d0ca;
+    font-size:13px;
+}
+.auth-user b{color:#5bd0a8;}
+.auth-logout{
+    padding:7px 14px;
+    border-radius:999px;
+    background:transparent;
+    color:#91a69d;
+    border:1px solid rgba(255,255,255,.15);
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+}
+.auth-logout:hover{background:#102a22;color:#f4f7f3;}
+
+@media(max-width:600px){
+    .auth-user b{display:none;}
+    .auth-user{padding:7px 10px;}
+}
+
+/* ---- Hero ---- */
+.hero{
+    min-height:620px;display:flex;align-items:center;justify-content:center;
+    text-align:center;padding:90px 20px;position:relative;overflow:hidden;
+    background:
+        linear-gradient(rgba(5,20,16,0.62),rgba(5,20,16,0.90)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=90");
+    background-size:cover;background-position:center;
+}
+.hero-content{max-width:850px;}
+.small-title{color:#5bd0a8;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:72px;line-height:1.05;margin-bottom:22px;}
+.hero h1 span{color:#5bd0a8;}
+.hero p{max-width:650px;margin:auto;color:#c2d0ca;font-size:17px;line-height:1.7;}
+
+.destinations{width:90%;max-width:1200px;margin:auto;padding:85px 0;}
+.section-heading{text-align:center;margin-bottom:45px;}
+.section-heading h2{font-family:'Playfair Display',serif;font-size:42px;margin-bottom:10px;}
+
+.destination-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.destination-card{
+    height:400px;border-radius:22px;overflow:hidden;position:relative;cursor:pointer;
+    border:1px solid rgba(255,255,255,0.10);box-shadow:0 25px 60px rgba(0,0,0,0.35);
+    transition:transform .35s ease,box-shadow .35s ease;
+}
+.destination-card:hover{transform:translateY(-8px);box-shadow:0 35px 75px rgba(0,0,0,0.55);}
+.destination-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+.destination-card:hover img{transform:scale(1.07);}
+.card-overlay{position:absolute;inset:0;background:linear-gradient(transparent 25%,rgba(2,12,9,0.25) 45%,rgba(2,12,9,0.94) 100%);}
+.card-content{position:absolute;left:24px;right:24px;bottom:22px;}
+.card-location{display:inline-block;color:#5bd0a8;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+.card-content h3{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:7px;}
+.card-content p{
+    color:#c5d1cc;font-size:13px;line-height:1.5;max-width:430px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.loading-msg{grid-column:1 / -1;text-align:center;padding:40px;color:#91a69d;}
+
+.info-section{width:90%;max-width:1000px;margin:0 auto;padding:15px 0 90px;text-align:center;}
+.info-box{background:#0c211b;border:1px solid rgba(255,255,255,0.08);border-radius:22px;padding:45px 30px;}
+.info-box h2{font-family:'Playfair Display',serif;font-size:32px;margin-bottom:14px;}
+.info-box p{color:#9cafa7;max-width:700px;margin:auto;line-height:1.7;font-size:14px;}
+
+footer{border-top:1px solid rgba(255,255,255,0.08);text-align:center;padding:35px 20px;color:#71857d;font-size:12px;}
+.footer-logo{font-family:'Playfair Display',serif;font-size:22px;color:#f4f7f3;margin-bottom:7px;}
+.footer-logo span{color:#5bd0a8;}
+
+@media(max-width:900px){.destination-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:750px){
+    .hero{min-height:550px;}.hero h1{font-size:50px;}.hero p{font-size:15px;}
+    .destination-grid{grid-template-columns:1fr;}.destination-card{height:400px;}
+    .section-heading h2{font-size:34px;}
+    .logo{font-size:24px;}
+}
+@media(max-width:450px){
+    .hero h1{font-size:42px;}.destinations{width:92%;}
+    .card-content{left:20px;right:20px;bottom:20px;}.card-content h3{font-size:26px;}
+    .auth-area{right:12px;gap:8px;}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Yatra<span>X</span></div>
+    <div class="auth-area" id="authArea">
+        <!-- Filled by JS below -->
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="small-title">Discover • Explore • Experience</div>
+        <h1>Where will your<br>next <span>journey</span> take you?</h1>
+        <p>
+            Explore India's most beautiful destinations,
+            discover hidden experiences and plan your journey
+            with YatraX.
+        </p>
+    </div>
+</section>
+
+<section class="destinations">
+    <div class="section-heading">
+        <h2>Choose Your Destination</h2>
+    </div>
+    <div class="destination-grid" id="destinationGrid">
+        <div class="loading-msg">Loading destinations...</div>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="info-box">
+        <h2>Your Journey Starts Here</h2>
+        <p>
+            Select any destination above to explore its places,
+            costs, timings and travel information.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-logo">Yatra<span>X</span></div>
+    Explore more. Travel better.
+</footer>
+
+<script>
+
+/* =========================================================
+   AUTH SESSION (localStorage based)
+   ========================================================= */
+
+function getCurrentUser() {
+    try {
+        const raw = localStorage.getItem("yatrax_user");
+        return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+        return null;
+    }
+}
+
+function logout() {
+    localStorage.removeItem("yatrax_user");
+    renderAuthArea();
+    alert("Logged out successfully.");
+}
+
+function renderAuthArea() {
+    const area = document.getElementById("authArea");
+    const user = getCurrentUser();
+    if (user) {
+        area.innerHTML =
+            '<span class="auth-user">Hi, <b>' + escapeHtml(user.name || user.email) + '</b></span>' +
+            '<button class="auth-logout" onclick="logout()">Logout</button>';
+    } else {
+        area.innerHTML = '<a href="auth.html">Login / Sign up</a>';
+    }
+}
+
+/* =========================================================
+   DESTINATIONS
+   ========================================================= */
+
+const API_BASE = "http://localhost:8080/api";
+
+const PAGE_MAP = {
+    "goa": "goa.html",
+    "kashmir": "kashmir.html"
+};
+
+const DISPLAY_NAMES = {
+    "taj mahal": "Agra"
+};
+
+const IMG_OVERRIDE = {
+    "taj mahal": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1600&q=85",
+    "jaipur": "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=1600&q=85",
+    "ladakh": "https://www.peakadventuretour.com/assets/imgs/leh-ladakh-tourism-01.webp"
+};
+
+function pageFor(name) {
+    if (!name) return null;
+    const key = name.toLowerCase().trim();
+    return PAGE_MAP[key] || null;
+}
+
+function escapeHtml(s) {
+    if (s === null || s === undefined) return "";
+    return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+}
+
+function truncate(text, max) {
+    if (!text) return "";
+    if (text.length <= max) return text;
+    return text.substring(0, max).replace(/\s+\S*$/, "") + "…";
+}
+
+function cardHtml(d) {
+    const key = (d.name || "").toLowerCase().trim();
+    const page = pageFor(d.name);
+    const click = page
+        ? ' onclick="window.location.href=\'' + page + '\'"'
+        : (d.id ? ' onclick="window.location.href=\'destination.html?id=' + d.id + '\'"' : "");
+    const shortDesc = truncate(d.description, 110);
+    const imgUrl = IMG_OVERRIDE[key] || d.imageUrl;
+    const displayName = DISPLAY_NAMES[key] || d.name;
+
+    return (
+        '<div class="destination-card"' + click + '>' +
+            '<img src="' + escapeHtml(imgUrl) + '" alt="' + escapeHtml(displayName) + '" ' +
+                 'onerror="this.src=\'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=800\'">' +
+            '<div class="card-overlay"></div>' +
+            '<div class="card-content">' +
+                '<div class="card-location">' + escapeHtml(d.state) + '</div>' +
+                '<h3>' + escapeHtml(displayName) + '</h3>' +
+                '<p>' + escapeHtml(shortDesc) + '</p>' +
+            '</div>' +
+        '</div>'
+    );
+}
+
+function loadDestinations() {
+    const grid = document.getElementById("destinationGrid");
+    fetch(API_BASE + "/destinations")
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (data) {
+            if (!data || data.length === 0) {
+                grid.innerHTML = '<p class="loading-msg">No destinations yet.</p>';
+                return;
+            }
+            grid.innerHTML = data.map(cardHtml).join("");
+        })
+        .catch(function (err) {
+            grid.innerHTML = '<p class="loading-msg" style="color:#e5b95c;">⚠️ Could not load destinations.</p>';
+            console.error(err);
+        });
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+
+renderAuthArea();
+loadDestinations();
+
+</script>
+
+</body>
+</html>

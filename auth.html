@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YatraX | Login / Sign up</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'DM Sans',sans-serif;background:#071713;color:#f4f7f3;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+    background-image:
+        linear-gradient(rgba(5,20,16,0.75),rgba(5,20,16,0.95)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=90");
+    background-size:cover;background-position:center;
+}
+header{
+    position:fixed;top:0;left:0;right:0;height:75px;
+    display:flex;justify-content:center;align-items:center;
+    background:rgba(7,23,19,0.94);border-bottom:1px solid rgba(255,255,255,0.08);z-index:100;
+}
+.logo{font-family:'Playfair Display',serif;font-size:30px;font-weight:600;letter-spacing:1px;}
+.logo span{color:#5bd0a8;}
+.back-btn{
+    position:fixed;top:20px;left:20px;z-index:200;
+    padding:10px 17px;border:1px solid rgba(255,255,255,.15);border-radius:30px;
+    background:#0b3025;color:white;font-size:13px;font-weight:600;
+    cursor:pointer;transition:.25s ease;text-decoration:none;font-family:inherit;
+}
+.back-btn:hover{background:#14543f;transform:translateY(-2px);}
+
+.auth-card{
+    width:100%;max-width:440px;
+    background:#0b211b;border:1px solid rgba(255,255,255,0.10);
+    border-radius:24px;padding:40px 34px;
+    box-shadow:0 40px 80px rgba(0,0,0,.6);
+    margin-top:60px;
+}
+.auth-card h1{
+    font-family:'Playfair Display',serif;font-size:32px;
+    margin-bottom:8px;text-align:center;
+}
+.auth-card .sub{
+    text-align:center;color:#91a69d;font-size:13px;margin-bottom:26px;
+}
+.tabs{
+    display:flex;background:#071713;border-radius:12px;
+    padding:4px;margin-bottom:24px;border:1px solid rgba(255,255,255,.06);
+}
+.tab{
+    flex:1;padding:11px;text-align:center;font-size:13px;font-weight:600;
+    border-radius:9px;cursor:pointer;color:#91a69d;transition:.2s;
+}
+.tab.active{background:#5bd0a8;color:#062119;}
+
+.field{margin-bottom:16px;}
+.field label{
+    display:block;color:#91a69d;font-size:11px;font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;margin-bottom:7px;
+}
+.field input{
+    width:100%;padding:13px 15px;border-radius:11px;border:1px solid rgba(255,255,255,.10);
+    background:#102a22;color:#f4f7f3;font-size:15px;font-family:inherit;
+    outline:none;transition:.2s;
+}
+.field input:focus{border-color:#5bd0a8;background:#0d3d2e;}
+
+.btn-primary{
+    width:100%;padding:14px;border-radius:11px;border:none;
+    background:#5bd0a8;color:#062119;font-weight:700;font-size:14px;
+    cursor:pointer;transition:.2s;font-family:inherit;margin-top:8px;
+}
+.btn-primary:hover{background:#71dcc0;transform:translateY(-2px);}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+.error-box{
+    display:none;background:#3a1818;border:1px solid #8b3a3a;color:#ffb0b0;
+    padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;
+}
+.error-box.show{display:block;}
+
+.success-box{
+    display:none;background:#0d3d2e;border:1px solid #5bd0a8;color:#a8f0d5;
+    padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;
+}
+.success-box.show{display:block;}
+</style>
+</head>
+<body>
+
+<header><div class="logo">Yatra<span>X</span></div></header>
+<a class="back-btn" href="index.html">← Back</a>
+
+<div class="auth-card">
+    <h1 id="cardTitle">Welcome back</h1>
+    <p class="sub" id="cardSub">Sign in to continue your journey</p>
+
+    <div class="tabs">
+        <div class="tab active" data-mode="login" onclick="switchMode('login')">Login</div>
+        <div class="tab" data-mode="signup" onclick="switchMode('signup')">Sign up</div>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+    <div class="success-box" id="successBox"></div>
+
+    <form id="authForm" onsubmit="handleSubmit(event)">
+        <div class="field" id="nameField" style="display:none;">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="field">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Min 4 characters" autocomplete="current-password" required minlength="4">
+        </div>
+        <button type="submit" class="btn-primary" id="submitBtn">Login</button>
+    </form>
+</div>
+
+<script>
+const API_BASE = "http://localhost:8080/api";
+let mode = "login";
+
+function switchMode(newMode){
+    mode = newMode;
+    document.querySelectorAll(".tab").forEach(t => {
+        t.classList.toggle("active", t.dataset.mode === newMode);
+    });
+    document.getElementById("nameField").style.display = (newMode === "signup") ? "block" : "none";
+    document.getElementById("cardTitle").innerText = newMode === "signup" ? "Create account" : "Welcome back";
+    document.getElementById("cardSub").innerText = newMode === "signup"
+        ? "Join YatraX and start exploring"
+        : "Sign in to continue your journey";
+    document.getElementById("submitBtn").innerText = newMode === "signup" ? "Create account" : "Login";
+    document.getElementById("password").autocomplete = newMode === "signup" ? "new-password" : "current-password";
+    hideMessages();
+}
+
+function showError(msg){
+    const el = document.getElementById("errorBox");
+    el.innerText = msg;
+    el.classList.add("show");
+    document.getElementById("successBox").classList.remove("show");
+}
+function showSuccess(msg){
+    const el = document.getElementById("successBox");
+    el.innerText = msg;
+    el.classList.add("show");
+    document.getElementById("errorBox").classList.remove("show");
+}
+function hideMessages(){
+    document.getElementById("errorBox").classList.remove("show");
+    document.getElementById("successBox").classList.remove("show");
+}
+
+function handleSubmit(e){
+    e.preventDefault();
+    hideMessages();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const btn = document.getElementById("submitBtn");
+
+    if (mode === "signup" && !name) {
+        showError("Please enter your name.");
+        return;
+    }
+    if (!email || !password) {
+        showError("Email and password are required.");
+        return;
+    }
+    if (password.length < 4) {
+        showError("Password must be at least 4 characters.");
+        return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = mode === "signup" ? "Creating account..." : "Signing in...";
+
+    const url = mode === "signup" ? API_BASE + "/auth/register" : API_BASE + "/auth/login";
+    const body = mode === "signup"
+        ? { name: name, email: email, password: password }
+        : { email: email, password: password };
+
+    fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    .then(async r => {
+        const text = await r.text();
+        let data;
+        try { data = JSON.parse(text); } catch(e) { data = { raw: text }; }
+        return { ok: r.ok, status: r.status, data: data };
+    })
+    .then(res => {
+        btn.disabled = false;
+        btn.innerText = mode === "signup" ? "Create account" : "Login";
+
+        if (mode === "signup") {
+            if (res.ok) {
+                showSuccess("Account created! Logging you in...");
+                // auto-login after signup
+                setTimeout(() => autoLogin(email, password), 500);
+            } else {
+                const msg = typeof res.data === "string" ? res.data : (res.data.raw || "Signup failed.");
+                showError(msg);
+            }
+        } else {
+            if (res.ok && res.data && res.data.id) {
+                localStorage.setItem("yatrax_user", JSON.stringify({
+                    id: res.data.id,
+                    name: res.data.name || res.data.email,
+                    email: res.data.email
+                }));
+                showSuccess("Login successful! Redirecting...");
+                setTimeout(() => { window.location.href = "index.html"; }, 600);
+            } else if (res.status === 401) {
+                showError("Invalid email or password.");
+            } else {
+                showError("Login failed. Please try again.");
+            }
+        }
+    })
+    .catch(err => {
+        btn.disabled = false;
+        btn.innerText = mode === "signup" ? "Create account" : "Login";
+        showError("Cannot reach server. Make sure the backend is running.");
+        console.error(err);
+    });
+}
+
+function autoLogin(email, password){
+    fetch(API_BASE + "/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: password })
+    })
+    .then(r => r.ok ? r.json() : null)
+    .then(user => {
+        if (user && user.id) {
+            localStorage.setItem("yatrax_user", JSON.stringify({
+                id: user.id,
+                name: user.name || user.email,
+                email: user.email
+            }));
+            setTimeout(() => { window.location.href = "index.html"; }, 400);
+        } else {
+            showSuccess("Account created! Please log in.");
+            switchMode("login");
+        }
+    })
+    .catch(() => { showSuccess("Account created! Please log in."); switchMode("login"); });
+}
+</script>
+
+</body>
+</html>
