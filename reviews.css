@@ -1,0 +1,330 @@
+/* =========================================================
+   YatraX — Reviews & Comments Section
+   ========================================================= */
+
+.reviews-section {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0;
+}
+
+.reviews-heading { margin-bottom: 26px; }
+
+.reviews-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.reviews-heading p {
+    color: #91a69d;
+    font-size: 13px;
+}
+
+/* ================= WRITE REVIEW FORM ================= */
+.review-write {
+    background: #0b211b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 30px;
+}
+
+.review-write .write-label {
+    display: block;
+    color: #91a69d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.star-selector {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.star-selector .star {
+    font-size: 26px;
+    cursor: pointer;
+    color: #3a4d46;
+    transition: 0.15s;
+    user-select: none;
+    line-height: 1;
+}
+
+.star-selector .star:hover,
+.star-selector .star.active {
+    color: #ffd24a;
+}
+
+.review-write textarea {
+    width: 100%;
+    min-height: 90px;
+    padding: 13px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #102a22;
+    color: #f4f7f3;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: 0.2s;
+    margin-bottom: 12px;
+}
+
+.review-write textarea:focus {
+    border-color: #5bd0a8;
+    background: #0d3d2e;
+}
+
+.review-write .post-btn {
+    padding: 11px 26px;
+    border-radius: 999px;
+    border: none;
+    background: #5bd0a8;
+    color: #062119;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.review-write .post-btn:hover {
+    background: #71dcc0;
+    transform: translateY(-2px);
+}
+
+.login-prompt {
+    background: #0b211b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 26px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #91a69d;
+    font-size: 14px;
+}
+
+.login-prompt a {
+    color: #5bd0a8;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.login-prompt a:hover { text-decoration: underline; }
+
+/* ================= REVIEWS LIST ================= */
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.no-reviews {
+    text-align: center;
+    padding: 50px 20px;
+    color: #6a7c74;
+    font-size: 14px;
+    background: #0b211b;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+}
+
+.review-card {
+    background: #0b211b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5bd0a8, #2a7a5c);
+    color: #062119;
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.review-meta { flex: 1; }
+
+.review-meta .name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #f4f7f3;
+    margin-bottom: 3px;
+}
+
+.review-meta .time {
+    color: #6a7c74;
+    font-size: 11px;
+}
+
+.review-rating {
+    color: #ffd24a;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.review-text {
+    color: #c2d0ca;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.review-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: transparent;
+    color: #91a69d;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.action-btn:hover {
+    background: #102a22;
+    color: #f4f7f3;
+}
+
+.action-btn.liked {
+    background: rgba(91, 208, 168, 0.15);
+    border-color: #5bd0a8;
+    color: #5bd0a8;
+}
+
+.action-btn.disliked {
+    background: rgba(255, 90, 90, 0.12);
+    border-color: #ff5a5a;
+    color: #ff5a5a;
+}
+
+.action-btn .count { font-size: 11px; }
+
+/* ================= REPLIES ================= */
+.replies {
+    margin-top: 16px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(91, 208, 168, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.reply-card {
+    background: #102a22;
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.reply-card .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+}
+
+.reply-card .name {
+    font-weight: 700;
+    font-size: 13px;
+    color: #f4f7f3;
+}
+
+.reply-card .time {
+    color: #6a7c74;
+    font-size: 10px;
+}
+
+.reply-text {
+    color: #c2d0ca;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.reply-form {
+    margin-top: 12px;
+    display: none;
+}
+
+.reply-form.show { display: block; }
+
+.reply-form textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    background: #102a22;
+    color: #f4f7f3;
+    font-size: 13px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    margin-bottom: 8px;
+}
+
+.reply-form textarea:focus { border-color: #5bd0a8; }
+
+.reply-form button {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    background: #5bd0a8;
+    color: #062119;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.reply-form button:hover { background: #71dcc0; }
+
+@media (max-width: 600px) {
+    .reviews-heading h2 { font-size: 24px; }
+    .review-write { padding: 18px; }
+    .replies { padding-left: 12px; }
+    .review-card { padding: 16px; }
+}

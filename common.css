@@ -1,0 +1,348 @@
+/* =========================================================
+   YatraX — Common Styles
+   Shared across all pages: header, footer, buttons, cards
+   ========================================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #071713;
+    color: #f4f7f3;
+    min-height: 100vh;
+}
+
+/* ================= HEADER ================= */
+header {
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    background: rgba(7, 23, 19, 0.94);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #f4f7f3;
+}
+
+.logo span { color: #5bd0a8; }
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: transparent;
+    color: #c2d0ca;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+    position: relative;
+}
+
+.nav-link:hover {
+    background: #102a22;
+    color: #f4f7f3;
+}
+
+.nav-link .heart-emoji { font-size: 15px; }
+
+.wishlist-badge {
+    display: none;
+    background: #ff3366;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+    margin-left: 2px;
+}
+
+.auth-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.auth-area a,
+.auth-area button {
+    padding: 9px 18px;
+    border-radius: 999px;
+    background: #5bd0a8;
+    color: #062119;
+    font-weight: 700;
+    font-size: 12px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.auth-area a:hover,
+.auth-area button:hover {
+    background: #71dcc0;
+    transform: translateY(-2px);
+}
+
+.auth-user { color: #c2d0ca; font-size: 13px; }
+.auth-user b { color: #5bd0a8; }
+
+.auth-logout {
+    padding: 7px 14px !important;
+    background: transparent !important;
+    color: #91a69d !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+.auth-logout:hover {
+    background: #102a22 !important;
+    color: #f4f7f3 !important;
+    transform: none !important;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    padding: 35px 20px;
+    color: #71857d;
+    font-size: 12px;
+    margin-top: 60px;
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #f4f7f3;
+    margin-bottom: 7px;
+}
+
+.footer-logo span { color: #5bd0a8; }
+
+/* ================= BUTTONS ================= */
+.back-btn {
+    position: fixed;
+    top: 15px;
+    left: 18px;
+    z-index: 1000;
+    padding: 10px 17px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    background: #0b3025;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+    font-family: 'DM Sans', sans-serif;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background: #14543f;
+    transform: translateY(-2px);
+}
+
+.map-btn {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 5000;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    background: #5bd0a8;
+    color: #062119;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: 0.25s;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.map-btn:hover {
+    transform: translateY(-3px);
+    background: #7be3ca;
+}
+
+/* ================= HEART / WISHLIST ================= */
+.heart-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 0;
+}
+
+.heart-btn:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: scale(1.1);
+}
+
+.heart-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.heart-btn svg path {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transition: 0.2s;
+}
+
+.heart-btn.active svg path {
+    fill: #ff3366;
+    stroke: #ff3366;
+}
+
+.heart-btn.active {
+    background: rgba(255, 51, 102, 0.15);
+    border-color: rgba(255, 51, 102, 0.5);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 600px) {
+    header { padding: 0 16px; height: 65px; }
+    .logo { font-size: 24px; }
+    .auth-user b { display: none; }
+    .nav-link { padding: 8px 12px; font-size: 12px; }
+}
+
+/* ================= LOADING / EMPTY ================= */
+.loading-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #91a69d;
+    font-size: 15px;
+}
+/* ================= MODAL HEART ================= */
+.modal-heart {
+    position: absolute;
+    top: 15px;
+    right: 65px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 0;
+    transition: 0.2s;
+}
+.modal-heart:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: scale(1.1);
+}
+.modal-heart svg {
+    width: 20px;
+    height: 20px;
+}
+.modal-heart svg path {
+    fill: none;
+    stroke: white;
+    stroke-width: 2;
+    stroke-linejoin: round;
+    transition: 0.2s;
+}
+.modal-heart.active svg path {
+    fill: #ff3366;
+    stroke: #ff3366;
+}
+.modal-heart.active {
+    background: rgba(255, 51, 102, 0.15);
+    border-color: rgba(255, 51, 102, 0.5);
+}
+/* ================= INPUT WARNING ================= */
+.input-warning {
+    display: none;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 190, 70, 0.12);
+    border: 1px solid rgba(255, 190, 70, 0.35);
+    color: #ffd27a;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.input-warning.show {
+    display: block;
+}
+/* ================= HEADER LEFT (Back + Logo) ================= */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-back {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    background: #0b3025;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s ease;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.header-back:hover {
+    background: #14543f;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .header-back {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}

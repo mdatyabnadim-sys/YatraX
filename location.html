@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YatraX | Destination</title>
+<title>YatraX | Location</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="common.css">
-<link rel="stylesheet" href="destination.css">
+<link rel="stylesheet" href="location.css">
 <link rel="stylesheet" href="reviews.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 
 <header>
     <div class="header-left">
-        <a href="index.html" class="header-back">← Back</a>
+        <button class="header-back" id="backBtn">← Back</button>
         <a href="index.html" class="logo">Yatra<span>X</span></a>
     </div>
     <div class="header-nav">
@@ -27,12 +27,33 @@
     </div>
 </header>
 
-<div id="content"><div class="loading-msg">Loading destination...</div></div>
+<div id="content"><div class="loading-msg">Loading location...</div></div>
 
-<!-- Reviews section (rendered by destination.js for the destination itself) -->
-<section class="reviews-section" id="reviewsSection" style="display:none;">
+<section class="map-section" id="mapSection">
+  <div class="map-box">
+    <div class="map-heading">
+      <div>
+        <h2 id="mapTitle">Location Map</h2>
+        <p>Explore online or use the preloaded offline map.</p>
+      </div>
+      <div class="map-buttons">
+        <button class="map-toggle active" id="onlineBtn" onclick="showOnline()">Online Map</button>
+        <button class="map-toggle" id="offlineBtn" onclick="showOffline()">Offline Map</button>
+        <button class="close-map" onclick="closeMap()">×</button>
+      </div>
+    </div>
+    <div class="map-frame">
+      <div id="onlineMap" class="online-map">
+        <iframe id="onlineMapFrame" src="" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <div id="offlineMap" class="offline-map"></div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews-section" id="reviewsSection">
   <div class="reviews-heading">
-    <h2 id="reviewsTitle">Reviews & Comments</h2>
+    <h2>Reviews & Comments</h2>
     <p>Share your experience with other travellers.</p>
   </div>
 
@@ -56,8 +77,13 @@
   <div class="review-list" id="reviewList"></div>
 </section>
 
+<footer>
+  <div class="footer-logo">Yatra<span>X</span></div>
+  Explore more. Travel better.
+</footer>
+
 <script src="common.js"></script>
 <script src="reviews.js"></script>
-<script src="destination.js"></script>
+<script src="location.js"></script>
 </body>
 </html>

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YatraX | Explore India</title>
+<title>YatraX | My Wishlist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="common.css">
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="wishlist.css">
 </head>
 <body>
 
@@ -23,36 +23,19 @@
     </div>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <div class="small-title">Discover • Explore • Experience</div>
-        <h1>Where will your<br>next <span>journey</span> take you?</h1>
-        <p>
-            Explore India's most beautiful destinations,
-            discover hidden experiences and plan your journey
-            with YatraX.
-        </p>
+<section class="wishlist-hero">
+    <div class="wishlist-hero-content">
+        <div class="small-title">Saved for later</div>
+        <h1>My Wishlist</h1>
+        <p>Your handpicked destinations, ready when you are.</p>
     </div>
 </section>
 
-<section class="destinations">
-    <div class="section-heading">
-        <h2>Choose Your Destination</h2>
+<main class="wishlist-container">
+    <div class="wishlist-grid" id="wishlistGrid">
+        <div class="loading-msg">Loading wishlist...</div>
     </div>
-    <div class="destination-grid" id="destinationGrid">
-        <div class="loading-msg">Loading destinations...</div>
-    </div>
-</section>
-
-<section class="info-section">
-    <div class="info-box">
-        <h2>Your Journey Starts Here</h2>
-        <p>
-            Select any destination above to explore its places,
-            costs, timings and travel information.
-        </p>
-    </div>
-</section>
+</main>
 
 <footer>
     <div class="footer-logo">Yatra<span>X</span></div>
@@ -60,6 +43,6 @@
 </footer>
 
 <script src="common.js"></script>
-<script src="index.js"></script>
+<script src="wishlist.js"></script>
 </body>
 </html>
