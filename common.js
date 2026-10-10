@@ -3,7 +3,7 @@
    Auth helpers + Wishlist system (uses localStorage)
    ========================================================= */
 
-const API_BASE = "https://humble-imagination-production-1165.up.railway.app/api";
+const API_BASE = "https://yatrax-backend-production.up.railway.app/api";
 
 /* ================= AUTH ================= */
 function getCurrentUser() {
