@@ -3,7 +3,7 @@
    Auth helpers + Wishlist system (uses localStorage)
    ========================================================= */
 
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://humble-imagination-production-1165.up.railway.app/api";
 
 /* ================= AUTH ================= */
 function getCurrentUser() {
